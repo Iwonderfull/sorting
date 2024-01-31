@@ -1,3 +1,4 @@
+import os
 from datetime import datetime, timedelta
 from faker import Faker
 import csv
@@ -74,4 +75,12 @@ def create_zoo(num_rows):
 
             csv_writer.writerow([i, fake.company(),fake.country(),fake.city()])
 
-create_vendros(600)
+
+yourPath = input("Enter your path ")
+
+num = int(input("Enter number of rows "))
+
+create_zoo(num)
+create_employees(num)
+create_animals(num)
+create_vendros(num)
