@@ -150,7 +150,7 @@ def create_zoo_row(row_id):
 entry_date_start = datetime(2005, 1, 9)
 entry_date_end = datetime.now()
 
-your_path = '/home/barry/Документы/Data/'
+your_path = '/home/barry/Documents/DataTest/'
 num_rows = 100
 
 vendors_file_path = your_path + 'Vendors.csv'
