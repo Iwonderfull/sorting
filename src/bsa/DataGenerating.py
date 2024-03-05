@@ -252,8 +252,10 @@ def ProviderCreate(num):
 
 def AnimalCreate(num):
     specie = random.choice(specie_arr)
+    birthday_date = generate_date(datetime.now() - timedelta(days=specie_dict[specie][4] * 365), entry_date_end)
+    entry_date = generate_date(max(datetime.now() - timedelta(days=specie_dict[specie][4] * 365), birthday_date),
+                               entry_date_end)
 
-    entry_date = generate_date(datetime.now() - timedelta(days=specie_dict[specie][4] * 365), entry_date_end)
     difference = datetime.now() - entry_date
     height = 0
     weight = 0
@@ -268,7 +270,9 @@ def AnimalCreate(num):
         weight = round(random.uniform(1.0, specie_dict[specie][3]), 2)
 
     gender = random.choice(["Male", "Female"])
-    return [num, f"'{random.choice(nickNames_arr)}'", f"'{entry_date}'", f"'{specie}'", maturity, weight, height, f"'{gender}'"]
+
+    return [num, f"'{random.choice(nickNames_arr)}'", f"'{birthday_date}::date'", f"'{entry_date}::date'",
+            f"'{specie}'", maturity, weight, height, f"'{gender}'"]
 
 
 # specie_id, name, is_predator, warm_aviary
@@ -308,24 +312,5 @@ path = "C:/Users/Sonya/Documents/"
 num_row = int(input("Введите количество строк: "))
 num_row -= 1
 
-provider_file_path = path + 'Provider.csv'
-animal_file_path = path + 'Animal.csv'
-staff_file_path = path + 'Staff.csv'
-zoo_file_path = path + 'Zoo.csv'
-#specie_file_path = path + 'Specie.csv'
 
-if num_row > 29:
-    FileCreate(zoo_file_path, ['id', 'name', 'country', 'city'], ZooCreate, 29)
-else:
-    FileCreate(zoo_file_path, ['id', 'name', 'country', 'city'], ZooCreate, num_row)
-
-if num_row > 153:
-    FileCreate(provider_file_path, ['id', 'name'], ProviderCreate, 153)
-else:
-    FileCreate(provider_file_path, ['id', 'name'], ProviderCreate, num_row)
-
-FileCreate(animal_file_path, ['id','name', 'entry_date', 'specie', 'maturity', 'weight', 'height', 'gender'], AnimalCreate, num_row)
-FileCreate(staff_file_path,
-           ['id','surname', 'name', 'patronymic', 'gender', 'date_of_birth', 'date_of_employment', 'salary', 'post'],
-           StaffCreate, num_row)
 #FileCreate(specie_file_path, ['specie_id', 'name', 'is_predator', 'warm_aviary'], SpecieCreate, num_row)
